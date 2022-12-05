@@ -1,3 +1,7 @@
 <resources>
     <string name="app_name">MSB - Marsz Sprint Bieganie</string>
+    <string name="speed">Speed: %1$.1fm/s</string>
+    <string name="time">Time: %1$ds</string>
+    <string name="distance">Distance: %1$.0fm</string>
+    <string name="avg">Average speed: %1$.1fm/s</string>
 </resources>

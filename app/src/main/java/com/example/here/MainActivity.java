@@ -1,16 +1,12 @@
 package com.example.here;
 
 import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.app.ActivityCompat;
-import androidx.core.content.ContextCompat;
 
-import android.Manifest;
 import android.content.Context;
-import android.content.pm.PackageManager;
 import android.os.Bundle;
 import android.util.Log;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.here.sdk.core.GeoCoordinates;
@@ -19,9 +15,7 @@ import com.here.sdk.core.engine.SDKNativeEngine;
 import com.here.sdk.core.engine.SDKOptions;
 import com.here.sdk.core.errors.InstantiationErrorException;
 import com.here.sdk.mapview.LocationIndicator;
-import com.here.sdk.mapview.MapError;
 import com.here.sdk.mapview.MapMeasure;
-import com.here.sdk.mapview.MapScene;
 import com.here.sdk.mapview.MapScheme;
 import com.here.sdk.mapview.MapView;
 
@@ -35,6 +29,11 @@ public class MainActivity extends AppCompatActivity {
     private LocationIndicator locationIndicator;
     private MapMeasure mapMeasureZoom;
     private android.location.Location startLocation;
+    private android.location.Location pastLocation;
+    private float distance = 0.0f;
+    private TextView speedText, avgSpeedText, distanceText, timeText;
+    private float speed = 0, avgSpeed = 0;
+    private long time, startTime;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -46,19 +45,47 @@ public class MainActivity extends AppCompatActivity {
         handleAndroidPermissions();
         platformPositioningProvider = new PlatformPositioningProvider(MainActivity.this);
         this.startLocation = platformPositioningProvider.getLastKnownLocation();
+        this.pastLocation = startLocation;
+
+        this.speedText = findViewById(R.id.speedTextView);
+        this.avgSpeedText = findViewById(R.id.avgSpeedTextView);
+        this.distanceText = findViewById(R.id.distanceTextView);
+        this.timeText = findViewById(R.id.timeTextView);
 
         this.mapView = findViewById(R.id.map_view);
         this.mapView.onCreate(savedInstanceState);
         this.loadMapScene();
 
+        displayData();
+
+        startTime = System.nanoTime();
         platformPositioningProvider.startLocating(new PlatformPositioningProvider.PlatformLocationListener() {
             @Override
             public void onLocationUpdated(android.location.Location location) {
                 mapView.getCamera().lookAt(
                         new GeoCoordinates(location.getLatitude(), location.getLongitude()), mapMeasureZoom);
                 locationIndicator.updateLocation(convertLocation(location));
+
+                distance += pastLocation.distanceTo(location);
+                pastLocation = new android.location.Location(location);
+                
+                time = (System.nanoTime() - startTime) / 1_000_000_000;
+
+                avgSpeed = distance/time;
+
+                speed = location.getSpeed();
+
+                displayData();
+                
             }
         });
+    }
+    
+    private void displayData() {
+        speedText.setText(getString(R.string.speed, speed));
+        distanceText.setText(getString(R.string.distance, distance));
+        avgSpeedText.setText(getString(R.string.avg, avgSpeed));
+        timeText.setText(getString(R.string.time, time));
     }
 
     private void initializeHERESDK() {
@@ -139,26 +166,6 @@ public class MainActivity extends AppCompatActivity {
         }
 
         return location;
-    }
-
-    private void addLocationIndicator(GeoCoordinates geoCoordinates,
-                                      LocationIndicator.IndicatorStyle indicatorStyle) {
-        LocationIndicator locationIndicator = new LocationIndicator();
-        locationIndicator.setLocationIndicatorStyle(indicatorStyle);
-
-        // A LocationIndicator is intended to mark the user's current location,
-        // including a bearing direction.
-        // For testing purposes, we create a Location object. Usually, you may want to get this from
-        // a GPS sensor instead.
-        Location location = new Location(geoCoordinates);
-        location.time = new Date();
-        location.bearingInDegrees = 0.0;
-
-        locationIndicator.updateLocation(location);
-
-        // A LocationIndicator listens to the lifecycle of the map view,
-        // therefore, for example, it will get destroyed when the map view gets destroyed.
-        mapView.addLifecycleListener(locationIndicator);
     }
 
     @Override
