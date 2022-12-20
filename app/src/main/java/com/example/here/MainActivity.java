@@ -2,13 +2,23 @@ package com.example.here;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.app.ActivityCompat;
 
+import android.Manifest;
 import android.content.Context;
+import android.content.pm.PackageManager;
 import android.os.Bundle;
 import android.util.Log;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.google.android.gms.location.FusedLocationProviderClient;
+import com.google.android.gms.location.LocationCallback;
+import com.google.android.gms.location.LocationRequest;
+import com.google.android.gms.location.LocationResult;
+import com.google.android.gms.location.LocationServices;
+import com.google.android.gms.location.Priority;
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.here.sdk.core.GeoCoordinates;
 import com.here.sdk.core.Location;
 import com.here.sdk.core.engine.SDKNativeEngine;
@@ -25,7 +35,6 @@ public class MainActivity extends AppCompatActivity {
 
     private MapView mapView;
     private PermissionsRequestor permissionsRequestor;
-    private PlatformPositioningProvider platformPositioningProvider;
     private LocationIndicator locationIndicator;
     private MapMeasure mapMeasureZoom;
     private android.location.Location startLocation;
@@ -34,6 +43,28 @@ public class MainActivity extends AppCompatActivity {
     private TextView speedText, avgSpeedText, distanceText, timeText;
     private float speed = 0, avgSpeed = 0;
     private long time, startTime;
+    private FusedLocationProviderClient fusedLocationProviderClient;
+    private LocationRequest locationRequest;
+    private LocationCallback locationCallback = new LocationCallback() {
+        @Override
+        public void onLocationResult(@NonNull LocationResult locationResult) {
+            android.location.Location location = locationResult.getLastLocation();
+            mapView.getCamera().lookAt(
+                    new GeoCoordinates(location.getLatitude(), location.getLongitude()), mapMeasureZoom);
+            locationIndicator.updateLocation(convertLocation(location));
+
+            distance += pastLocation.distanceTo(location);
+            pastLocation = new android.location.Location(location);
+
+            time = (System.nanoTime() - startTime) / 1_000_000_000;
+
+            avgSpeed = distance/time;
+
+            speed = location.getSpeed();
+
+            displayData();
+        }
+    };
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -43,8 +74,27 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         handleAndroidPermissions();
-        platformPositioningProvider = new PlatformPositioningProvider(MainActivity.this);
-        this.startLocation = platformPositioningProvider.getLastKnownLocation();
+        this.locationRequest = new LocationRequest.Builder(Priority.PRIORITY_HIGH_ACCURACY)
+                .setWaitForAccurateLocation(false)
+                .setMinUpdateIntervalMillis(3000)
+                .setMaxUpdateDelayMillis(10000)
+                .build();
+        this.fusedLocationProviderClient = LocationServices.getFusedLocationProviderClient(this);
+        if (ActivityCompat.checkSelfPermission(this,
+                Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED &&
+                ActivityCompat.checkSelfPermission(this,
+                        Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
+            fusedLocationProviderClient.getLastLocation().addOnSuccessListener(this, new OnSuccessListener<android.location.Location>() {
+                @Override
+                public void onSuccess(android.location.Location location) {
+                    startLocation = location;
+                }
+            });
+        }
+        else {
+            //toast
+            finish();
+        }
         this.pastLocation = startLocation;
 
         this.speedText = findViewById(R.id.speedTextView);
@@ -59,26 +109,8 @@ public class MainActivity extends AppCompatActivity {
         displayData();
 
         startTime = System.nanoTime();
-        platformPositioningProvider.startLocating(new PlatformPositioningProvider.PlatformLocationListener() {
-            @Override
-            public void onLocationUpdated(android.location.Location location) {
-                mapView.getCamera().lookAt(
-                        new GeoCoordinates(location.getLatitude(), location.getLongitude()), mapMeasureZoom);
-                locationIndicator.updateLocation(convertLocation(location));
+        fusedLocationProviderClient.requestLocationUpdates(locationRequest, locationCallback, null);
 
-                distance += pastLocation.distanceTo(location);
-                pastLocation = new android.location.Location(location);
-                
-                time = (System.nanoTime() - startTime) / 1_000_000_000;
-
-                avgSpeed = distance/time;
-
-                speed = location.getSpeed();
-
-                displayData();
-                
-            }
-        });
     }
     
     private void displayData() {
@@ -184,7 +216,7 @@ public class MainActivity extends AppCompatActivity {
     protected void onDestroy() {
         mapView.onDestroy();
         disposeHERESDK();
-        platformPositioningProvider.stopLocating();
+        fusedLocationProviderClient.removeLocationUpdates(locationCallback);
         super.onDestroy();
     }
 
