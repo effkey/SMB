@@ -81,9 +81,9 @@ public class MainActivity extends AppCompatActivity {
                 .build();
         this.fusedLocationProviderClient = LocationServices.getFusedLocationProviderClient(this);
         if (ActivityCompat.checkSelfPermission(this,
-                Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED &&
+                Manifest.permission.ACCESS_FINE_LOCATION) == PackageManager.PERMISSION_GRANTED &&
                 ActivityCompat.checkSelfPermission(this,
-                        Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
+                        Manifest.permission.ACCESS_COARSE_LOCATION) == PackageManager.PERMISSION_GRANTED) {
             fusedLocationProviderClient.getLastLocation().addOnSuccessListener(this, new OnSuccessListener<android.location.Location>() {
                 @Override
                 public void onSuccess(android.location.Location location) {
@@ -93,6 +93,7 @@ public class MainActivity extends AppCompatActivity {
         }
         else {
             //toast
+            Log.d("PERM", "NO PERMISSIONS");
             finish();
         }
         this.pastLocation = startLocation;
