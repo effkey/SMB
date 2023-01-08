@@ -3,6 +3,7 @@ package com.example.here;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
+import androidx.core.app.ActivityCompat.OnRequestPermissionsResultCallback;
 
 import android.Manifest;
 import android.content.Context;
@@ -37,7 +38,7 @@ public class MainActivity extends AppCompatActivity {
     private PermissionsRequestor permissionsRequestor;
     private LocationIndicator locationIndicator;
     private MapMeasure mapMeasureZoom;
-    private android.location.Location startLocation;
+//    private android.location.Location startLocation;
     private android.location.Location pastLocation;
     private float distance = 0.0f;
     private TextView speedText, avgSpeedText, distanceText, timeText;
@@ -72,12 +73,18 @@ public class MainActivity extends AppCompatActivity {
         initializeHERESDK();
 
         setContentView(R.layout.activity_main);
+        this.mapView = findViewById(R.id.map_view);
+        this.mapView.onCreate(savedInstanceState);
 
-        handleAndroidPermissions();
-        this.locationRequest = new LocationRequest.Builder(Priority.PRIORITY_HIGH_ACCURACY)
+        handleAndroidPermissions(savedInstanceState);
+
+    }
+
+    private void startLocating(Bundle savedInstanceState) {
+        this.locationRequest = new LocationRequest.Builder(Priority.PRIORITY_BALANCED_POWER_ACCURACY)
                 .setWaitForAccurateLocation(false)
-                .setMinUpdateIntervalMillis(3000)
-                .setMaxUpdateDelayMillis(10000)
+                .setMinUpdateIntervalMillis(500)
+                .setMaxUpdateDelayMillis(1000)
                 .build();
         this.fusedLocationProviderClient = LocationServices.getFusedLocationProviderClient(this);
         if (ActivityCompat.checkSelfPermission(this,
@@ -87,33 +94,31 @@ public class MainActivity extends AppCompatActivity {
             fusedLocationProviderClient.getLastLocation().addOnSuccessListener(this, new OnSuccessListener<android.location.Location>() {
                 @Override
                 public void onSuccess(android.location.Location location) {
-                    startLocation = location;
+                    pastLocation = location; //start
                 }
             });
         }
         else {
-            //toast
+//            Toast.makeText(getApplicationContext(),"Permission denied",Toast.LENGTH_SHORT).show();
             Log.d("PERM", "NO PERMISSIONS");
             finish();
         }
-        this.pastLocation = startLocation;
+
+//        this.pastLocation = startLocation;
 
         this.speedText = findViewById(R.id.speedTextView);
         this.avgSpeedText = findViewById(R.id.avgSpeedTextView);
         this.distanceText = findViewById(R.id.distanceTextView);
         this.timeText = findViewById(R.id.timeTextView);
 
-        this.mapView = findViewById(R.id.map_view);
-        this.mapView.onCreate(savedInstanceState);
         this.loadMapScene();
 
         displayData();
 
-        startTime = System.nanoTime();
-        fusedLocationProviderClient.requestLocationUpdates(locationRequest, locationCallback, null);
-
+        this.startTime = System.nanoTime();
+        this.fusedLocationProviderClient.requestLocationUpdates(locationRequest, locationCallback, null);
     }
-    
+
     private void displayData() {
         speedText.setText(getString(R.string.speed, speed));
         distanceText.setText(getString(R.string.distance, distance));
@@ -151,23 +156,31 @@ public class MainActivity extends AppCompatActivity {
 
                 locationIndicator = new LocationIndicator();
                 locationIndicator.setLocationIndicatorStyle(LocationIndicator.IndicatorStyle.PEDESTRIAN);
-                locationIndicator.updateLocation(convertLocation(startLocation));
+                locationIndicator.updateLocation(convertLocation(this.pastLocation)); // start
 
                 mapView.addLifecycleListener(locationIndicator);
                 mapView.getCamera().lookAt(
-                        new GeoCoordinates(startLocation.getLatitude(), startLocation.getLongitude()), mapMeasureZoom);
+                        new GeoCoordinates(pastLocation.getLatitude(), pastLocation.getLongitude()), mapMeasureZoom); //start
             } else {
                 Log.d("loadMapScene()", "Loading map failed: mapError: " + mapError.name());
             }
         });
     }
 
-    private void handleAndroidPermissions() {
+    @Override
+    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
+        permissionsRequestor.onRequestPermissionsResult(requestCode, grantResults);
+    }
+
+
+    private void handleAndroidPermissions(Bundle savedInstanceState) {
         permissionsRequestor = new PermissionsRequestor(this);
         permissionsRequestor.request(new PermissionsRequestor.ResultListener(){
 
             @Override
             public void permissionsGranted() {
+                startLocating(savedInstanceState);
             }
 
             @Override

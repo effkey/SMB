@@ -24,6 +24,7 @@ import android.app.Activity;
 import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
 import android.os.Build;
+import android.util.Log;
 
 import java.util.ArrayList;
 
@@ -102,6 +103,8 @@ public class PermissionsRequestor {
     }
 
     public void onRequestPermissionsResult(int requestCode, @NonNull int[] grantResults) {
+        Log.d("LOCATION", "PERM RESULT");
+
         if (resultListener == null) {
             return;
         }
