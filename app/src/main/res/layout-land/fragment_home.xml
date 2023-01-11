@@ -1,0 +1,245 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".MainActivity"
+    android:screenOrientation="landscape" >
+
+    <ScrollView
+        android:id="@+id/scrollView2"
+        android:layout_width="fill_parent"
+        android:layout_height="0dp"
+        android:layout_marginBottom="8dp"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.008"
+        tools:ignore="MissingConstraints"
+        tools:layout_editor_absoluteX="2dp">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+
+            <TextView
+                android:id="@+id/text_id"
+                android:layout_width="118dp"
+                android:layout_height="46dp"
+                android:layout_marginTop="988dp"
+                android:text="@string/text_view"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.453"
+                app:layout_constraintStart_toEndOf="@+id/button_id2"
+                app:layout_constraintTop_toTopOf="parent"
+                tools:ignore="MissingConstraints" />
+
+            <TextView
+                android:id="@+id/welcomText"
+                android:layout_width="584dp"
+                android:layout_height="51dp"
+                android:layout_marginTop="68dp"
+                android:text="Witaj, Gabriel!"
+                android:textColor="#000000"
+                android:textSize="28sp"
+                app:layout_constraintEnd_toEndOf="@+id/button_settings"
+                app:layout_constraintHorizontal_bias="0.0"
+                app:layout_constraintStart_toStartOf="@+id/userButton"
+                app:layout_constraintTop_toTopOf="parent"
+                tools:ignore="MissingConstraints" />
+
+            <TextView
+                android:id="@+id/welcomText2"
+                android:layout_width="586dp"
+                android:layout_height="32dp"
+                android:layout_marginTop="124dp"
+                android:text="Sprawdź, kto jest aktywny z twoich znajomych"
+                android:textColor="#000000"
+                android:textSize="14sp"
+                app:layout_constraintEnd_toEndOf="@+id/button_settings"
+                app:layout_constraintHorizontal_bias="0.0"
+                app:layout_constraintStart_toStartOf="@+id/welcomText"
+                app:layout_constraintTop_toTopOf="parent"
+                tools:ignore="MissingConstraints" />
+
+            <Button
+
+                android:id="@+id/userButton"
+                style="@style/style_btn"
+                android:background="@drawable/rounded_corner_green"
+                android:layout_width="143dp"
+                android:layout_height="39dp"
+                android:layout_marginTop="16dp"
+                android:text="Gabriel"
+                android:textSize="14sp"
+                app:icon="@drawable/ic_round_person_24"
+                app:layout_constraintBottom_toTopOf="@+id/welcomText"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.059"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintVertical_bias="0.0" />
+
+            <LinearLayout
+                android:id="@+id/linearLayout2"
+                android:layout_width="match_parent"
+                android:layout_height="64dp"
+                android:layout_marginTop="12dp"
+                android:weightSum="4"
+                app:layout_constraintTop_toBottomOf="@+id/categories"
+                tools:layout_editor_absoluteX="0dp">
+
+                <androidx.appcompat.widget.AppCompatButton
+                    android:id="@+id/marszButton"
+                    style="@style/style_btn"
+                    android:layout_width="wrap_content"
+                    android:layout_height="fill_parent"
+                    android:layout_marginStart="2dp"
+                    android:layout_marginTop="12dp"
+                    android:layout_weight="1"
+                    android:background="@drawable/rounded_corner_blue"
+                    android:text="@string/button_marsz"
+                    tools:ignore="MissingConstraints" />
+
+                <androidx.appcompat.widget.AppCompatButton
+                    android:id="@+id/kolarstwoButton"
+                    style="@style/style_btn"
+                    android:layout_width="wrap_content"
+                    android:layout_height="fill_parent"
+                    android:layout_marginStart="12dp"
+                    android:layout_marginTop="12dp"
+                    android:layout_weight="1"
+                    android:background="@drawable/rounded_corner_orange"
+                    android:text="@string/button_kolarstwo"
+                    tools:ignore="MissingConstraints" />
+
+                <androidx.appcompat.widget.AppCompatButton
+                    android:id="@+id/kajakarstwoButton"
+                    style="@style/style_btn"
+                    android:layout_width="wrap_content"
+                    android:layout_height="fill_parent"
+                    android:layout_marginStart="12dp"
+                    android:layout_marginTop="12dp"
+                    android:layout_weight="1"
+                    android:background="@drawable/rounded_corner_red"
+                    android:text="@string/button_kajakarstwo"
+                    tools:ignore="MissingConstraints" />
+
+                <androidx.appcompat.widget.AppCompatButton
+                    android:id="@+id/sprintButton"
+                    style="@style/style_btn"
+                    android:layout_width="wrap_content"
+                    android:layout_height="fill_parent"
+                    android:layout_marginStart="12dp"
+                    android:layout_marginTop="12dp"
+                    android:layout_weight="1"
+                    android:background="@drawable/rounded_corner_pink"
+                    android:text="@string/button_sprint"
+                    tools:ignore="MissingConstraints" />
+            </LinearLayout>
+
+            <TextView
+                android:id="@+id/upcoming_events"
+                android:layout_width="591dp"
+                android:layout_height="38dp"
+                android:layout_marginTop="16dp"
+                android:text="Nadchodzące wydarzenia"
+                android:textColor="#000000"
+                android:textSize="14sp"
+                app:layout_constraintEnd_toEndOf="@+id/recyclerView"
+                app:layout_constraintHorizontal_bias="0.0"
+                app:layout_constraintStart_toStartOf="@+id/welcomText"
+                app:layout_constraintTop_toBottomOf="@+id/recyclerView"
+                tools:ignore="MissingConstraints" />
+
+            <TextView
+                android:id="@+id/categories"
+                android:layout_width="593dp"
+                android:layout_height="35dp"
+                android:layout_marginTop="20dp"
+                android:text="Przeglądaj po kategorii:"
+                android:textColor="#000000"
+                android:textSize="14sp"
+                app:layout_constraintEnd_toEndOf="@+id/recyclerView2"
+                app:layout_constraintHorizontal_bias="0.0"
+                app:layout_constraintStart_toStartOf="@+id/welcomText"
+                app:layout_constraintTop_toBottomOf="@+id/recyclerView2"
+                tools:ignore="MissingConstraints" />
+
+            <Button
+                android:id="@+id/button_settings"
+                style="@style/ToggleButtonWithIconOnly"
+                android:layout_width="69dp"
+                android:layout_height="51dp"
+                android:layout_marginTop="72dp"
+                android:gravity="center"
+                app:icon="@drawable/ic_baseline_settings_24"
+                app:iconTint="@color/lightgrey"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.953"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                tools:ignore="MissingConstraints" />
+
+            <androidx.appcompat.widget.AppCompatButton
+                android:id="@+id/button_id2"
+                android:layout_width="139dp"
+                android:layout_height="58dp"
+                android:layout_marginTop="976dp"
+                android:text="@string/button_send2"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.151"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                tools:ignore="MissingConstraints" />
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/recyclerView"
+                android:layout_width="match_parent"
+                android:layout_height="117dp"
+                android:layout_marginTop="16dp"
+                android:background="@color/lightgrey2"
+                app:layout_constraintEnd_toEndOf="@+id/welcomText2"
+                app:layout_constraintHorizontal_bias="0.009"
+                app:layout_constraintStart_toStartOf="@+id/welcomText2"
+                app:layout_constraintTop_toBottomOf="@+id/welcomText2">
+
+            </androidx.recyclerview.widget.RecyclerView>
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/recyclerView2"
+                android:layout_width="match_parent"
+                android:layout_height="113dp"
+                android:layout_marginTop="20dp"
+                android:background="@color/lightgrey2"
+                app:layout_constraintEnd_toEndOf="@+id/upcoming_events"
+                app:layout_constraintHorizontal_bias="0.666"
+                app:layout_constraintStart_toStartOf="@+id/upcoming_events"
+                app:layout_constraintTop_toBottomOf="@+id/upcoming_events" />
+
+            <com.google.android.gms.maps.MapView
+                android:id="@+id/mapView"
+                android:layout_width="match_parent"
+                android:layout_height="247dp"
+                android:layout_marginTop="712dp"
+                android:background="@color/lightgrey2"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.0"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <TextView
+                android:id="@+id/textView"
+                android:layout_width="234dp"
+                android:layout_height="50dp"
+                android:layout_marginTop="32dp"
+                android:text="TextView"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.052"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/linearLayout2" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </ScrollView>
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

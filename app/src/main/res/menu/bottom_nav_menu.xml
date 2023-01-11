@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+<item
+    android:id="@+id/home"
+    android:title="Home"
+    android:icon="@drawable/ic_cup_foreground"/>
+<item
+    android:id="@+id/run"
+    android:title="Run"
+    android:icon="@drawable/ic_run_foreground"/>
+<item
+    android:id="@+id/cup"
+    android:title="Cup"
+    android:icon="@drawable/ic_cup_foreground"/>
+<item
+    android:id="@+id/moving"
+    android:title="Moving"
+    android:icon="@drawable/ic_moving_foreground"/>
+<item
+    android:id="@+id/person"
+    android:title="Person"
+    android:icon="@drawable/ic_person_foreground"/>
+</menu>

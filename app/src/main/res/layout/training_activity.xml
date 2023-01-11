@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:gravity="center"
+    android:id="@+id/activity_training"
+    android:background="@color/black">
+
+    <Button
+        android:id="@+id/end_trening"
+        android:layout_width="300dp"
+        android:layout_height="60dp"
+        android:backgroundTint="@color/red"
+        android:text="@string/end_training" />
+
+    <com.here.sdk.mapview.MapView
+        android:id="@+id/map_view"
+        android:layout_width="match_parent"
+        android:layout_height="300dp"
+        android:layout_below="@id/motivation_field"/>
+
+        <TextView
+            android:id="@+id/cur_speed"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:text="szczegóły"
+            android:textSize="40dp" />
+
+        <TextView
+            android:id="@+id/avg_speed"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:text="szczegóły"
+            android:textSize="20dp"/>
+        <TextView
+            android:id="@+id/max_speed"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:text="szczegóły"
+            android:textSize="20dp"/>
+        <TextView
+            android:id="@+id/distance"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:text="szczegóły"
+            android:textSize="20dp"/>
+        <TextView
+            android:id="@+id/time"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:text="szczegóły"
+            android:textSize="20dp"/>
+        <TextView
+            android:id="@+id/kcal"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:text="szczegóły"
+            android:textSize="20dp"/>
+
+    <Button
+        android:id="@+id/return_pause_training"
+        android:layout_width="300dp"
+        android:layout_height="60dp"
+        android:backgroundTint="@color/green"
+        android:text="@string/started" />
+</LinearLayout>

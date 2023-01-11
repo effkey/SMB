@@ -1,0 +1,211 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".MainActivity">
+
+    <ScrollView
+        android:id="@+id/scrollView2"
+        android:layout_width="fill_parent"
+        android:layout_height="0dp"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:ignore="MissingConstraints"
+        tools:layout_editor_absoluteX="0dp">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <TextView
+                android:id="@+id/welcomText"
+                android:layout_width="284dp"
+                android:layout_height="53dp"
+                android:layout_marginTop="12dp"
+                android:text="Witaj, Gabriel!"
+                android:textColor="#000000"
+                android:textSize="28sp"
+                app:layout_constraintEnd_toEndOf="@+id/button_settings"
+                app:layout_constraintHorizontal_bias="0.0"
+                app:layout_constraintStart_toStartOf="@+id/userButton"
+                app:layout_constraintTop_toBottomOf="@+id/userButton"
+                tools:ignore="MissingConstraints" />
+
+            <TextView
+                android:id="@+id/welcomText2"
+                android:layout_width="329dp"
+                android:layout_height="33dp"
+                android:layout_marginTop="132dp"
+                android:text="Sprawdź, kto jest aktywny z twoich znajomych"
+                android:textColor="#000000"
+                android:textSize="14sp"
+                app:layout_constraintEnd_toEndOf="@+id/button_settings"
+                app:layout_constraintHorizontal_bias="0.0"
+                app:layout_constraintStart_toStartOf="@+id/welcomText"
+                app:layout_constraintTop_toTopOf="parent"
+                tools:ignore="MissingConstraints" />
+
+            <Button
+                android:id="@+id/userButton"
+                style="@style/style_btn"
+                android:layout_width="wrap_content"
+                android:layout_height="fill_parent"
+                android:layout_marginTop="16dp"
+                android:background="@drawable/rounded_corner_green"
+                android:text="Gabriel"
+                android:textSize="14sp"
+                app:icon="@drawable/ic_round_person_24"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.06"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <LinearLayout
+                android:id="@+id/linearLayout"
+                android:layout_width="match_parent"
+                android:layout_height="64dp"
+                android:layout_marginTop="12dp"
+                android:weightSum="4"
+                app:layout_constraintTop_toBottomOf="@+id/categories"
+                tools:layout_editor_absoluteX="0dp">
+
+                <androidx.appcompat.widget.AppCompatButton
+                    android:id="@+id/marszButton"
+                    style="@style/style_btn"
+                    android:layout_width="wrap_content"
+                    android:layout_height="fill_parent"
+                    android:layout_marginStart="2dp"
+                    android:layout_marginTop="12dp"
+                    android:layout_weight="1"
+                    android:background="@drawable/rounded_corner_blue"
+                    android:text="@string/button_marsz"
+                    tools:ignore="MissingConstraints" />
+
+                <androidx.appcompat.widget.AppCompatButton
+                    android:id="@+id/kolarstwoButton"
+                    style="@style/style_btn"
+                    android:layout_width="wrap_content"
+                    android:layout_height="fill_parent"
+                    android:layout_marginStart="12dp"
+                    android:layout_marginTop="12dp"
+                    android:layout_weight="1"
+                    android:background="@drawable/rounded_corner_orange"
+                    android:text="@string/button_kolarstwo"
+                    tools:ignore="MissingConstraints" />
+
+                <androidx.appcompat.widget.AppCompatButton
+                    android:id="@+id/kajakarstwoButton"
+                    style="@style/style_btn"
+                    android:layout_width="wrap_content"
+                    android:layout_height="fill_parent"
+                    android:layout_marginStart="12dp"
+                    android:layout_marginTop="12dp"
+                    android:layout_weight="1"
+                    android:background="@drawable/rounded_corner_red"
+                    android:text="@string/button_kajakarstwo"
+                    tools:ignore="MissingConstraints" />
+
+                <androidx.appcompat.widget.AppCompatButton
+                    android:id="@+id/sprintButton"
+                    style="@style/style_btn"
+                    android:layout_width="wrap_content"
+                    android:layout_height="fill_parent"
+                    android:layout_marginStart="12dp"
+                    android:layout_marginTop="12dp"
+                    android:layout_weight="1"
+                    android:background="@drawable/rounded_corner_pink"
+                    android:text="@string/button_sprint"
+                    tools:ignore="MissingConstraints" />
+            </LinearLayout>
+
+            <TextView
+                android:id="@+id/upcoming_events"
+                android:layout_width="378dp"
+                android:layout_height="30dp"
+                android:layout_marginTop="28dp"
+                android:text="Nadchodzące wydarzenia"
+                android:textColor="#000000"
+                android:textSize="14sp"
+                app:layout_constraintEnd_toEndOf="@+id/button_settings"
+                app:layout_constraintHorizontal_bias="0.0"
+                app:layout_constraintStart_toStartOf="@+id/welcomText"
+                app:layout_constraintTop_toBottomOf="@+id/recyclerView"
+                tools:ignore="MissingConstraints" />
+
+            <TextView
+                android:id="@+id/categories"
+                android:layout_width="379dp"
+                android:layout_height="27dp"
+                android:layout_marginTop="16dp"
+                android:text="Przeglądaj po kategorii:"
+                android:textColor="#000000"
+                android:textSize="14sp"
+                app:layout_constraintEnd_toEndOf="@+id/button_settings"
+                app:layout_constraintHorizontal_bias="0.0"
+                app:layout_constraintStart_toStartOf="@+id/welcomText"
+                app:layout_constraintTop_toBottomOf="@+id/recyclerView2"
+                tools:ignore="MissingConstraints" />
+
+            <Button
+                android:id="@+id/button_settings"
+                style="@style/ToggleButtonWithIconOnly"
+                android:layout_width="69dp"
+                android:layout_height="51dp"
+                android:layout_marginTop="72dp"
+                android:gravity="center"
+                app:icon="@drawable/ic_baseline_settings_24"
+                app:iconTint="@color/lightgrey"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.953"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                tools:ignore="MissingConstraints" />
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/recyclerView"
+                android:layout_width="match_parent"
+                android:layout_height="119dp"
+                android:layout_marginTop="168dp"
+                android:background="@color/lightgrey2"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.355"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/recyclerView2"
+                android:layout_width="match_parent"
+                android:layout_height="113dp"
+                android:layout_marginTop="8dp"
+                android:background="@color/lightgrey2"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.4"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/upcoming_events" />
+
+            <com.here.sdk.mapview.MapView
+                android:id="@+id/mapView"
+                android:layout_width="match_parent"
+                android:layout_height="247dp"
+                android:layout_marginTop="84dp"
+                android:background="@color/lightgrey2"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.0"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/linearLayout" />
+
+            <TextView
+                android:id="@+id/textView"
+                android:layout_width="165dp"
+                android:layout_height="30dp"
+                android:layout_marginTop="24dp"
+                android:text="TextView"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.125"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/linearLayout" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </ScrollView>
+</androidx.constraintlayout.widget.ConstraintLayout>
