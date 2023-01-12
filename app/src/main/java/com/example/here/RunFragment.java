@@ -47,6 +47,8 @@ public class RunFragment extends Fragment {
     private MapView mapView;
     private Button startTraining;
 
+    private RouteCreator routeCreator;
+
     public RunFragment(){
         // require a empty public constructor
     }
@@ -72,7 +74,15 @@ public class RunFragment extends Fragment {
         });
 
         this.mapView.onCreate(savedInstanceState);
-        setToLastRoute(new Waypoint(new GeoCoordinates(lastTourStartV1, lastTourStartV2)), new Waypoint(new GeoCoordinates(lastTourEndV1, lastTourEndV2)));     //rysowanie poprzedniej trasy po wspolrzednych
+
+        this.routeCreator = new RouteCreator(mapView);
+        routeCreator.createRoute(Arrays.asList(
+                new Waypoint(new GeoCoordinates(lastTourStartV1, lastTourStartV2)),
+                new Waypoint(new GeoCoordinates(lastTourEndV1, lastTourEndV2))
+        ));
+
+        distance.setText("Odległość: " + this.routeCreator.getCurrentRouteLength()/1000.0 + " km");
+
         this.duration.setText("Długość trwania: "+timeOfActivity + " minut");
         this.avgSpeed.setText("Średnia prędkość: "+avgSpeedLastTour + " km/h");
         this.maxSpeed.setText("Najwyższa prędkość: "+maxSpeedLastTour + " km/h");
@@ -80,46 +90,7 @@ public class RunFragment extends Fragment {
         return view;
     }
 
-    private void setToLastRoute(Waypoint start, Waypoint end){
-        RoutingEngine routingEngine;
-        try {
-            routingEngine = new RoutingEngine();
-        } catch (InstantiationErrorException e) {
-            throw new RuntimeException("Initialization of RoutingEngine failed: " + e.error.name());
-        }
-
-        Waypoint startWaypoint = start;
-        Waypoint destinationWaypoint = end;
-
-        List<Waypoint> waypoints =
-                new ArrayList<>(Arrays.asList(startWaypoint, destinationWaypoint));
-
-        routingEngine.calculateRoute(
-                waypoints,
-                new BicycleOptions(),
-                new CalculateRouteCallback() {
-                    @Override
-                    public void onRouteCalculated(@Nullable RoutingError routingError, @Nullable List<Route> routes) {
-                        if (routingError == null) {
-                            Route route = routes.get(0);
-                            GeoPolyline routeGeoPolyline = route.getGeometry();
-                            float widthInPixels = 10;
-                            MapPolyline routeMapPolyline = new MapPolyline(routeGeoPolyline,
-                                    widthInPixels,
-                                    Color.valueOf(0,1,0)); // RGBA
-
-                            mapView.getMapScene().addMapPolyline(routeMapPolyline);
-//                            long estimatedTravelTimeInSeconds = route.getDuration().getSeconds();     //przewidywany czas
-                            int routeLengthInMeters = route.getLengthInMeters();    //mierzy odleglosc
-                            distance.setText("Odległość: " + routeLengthInMeters/1000.0 + " km");
-                            Log.d("wyliczona odleglosc: ", routeLengthInMeters+"");
-                            loadMapScene(routeLengthInMeters);
-                        }
-                    }
-                });
-    }
-
-    private void loadMapScene(int routeLengthInMeters) {
+    /*private void loadMapScene(int routeLengthInMeters) {
         mapView.getMapScene().loadScene(MapScheme.NORMAL_DAY, mapError -> {
             if (mapError == null) {
                 MapMeasure mapMeasureZoom = new MapMeasure(MapMeasure.Kind.DISTANCE, routeLengthInMeters);
@@ -129,7 +100,7 @@ public class RunFragment extends Fragment {
                 Log.d("loadMapScene()", "Loading map failed: mapError: " + mapError.name());
             }
         });
-    }
+    }*/
 
 //    @Override
 //    public void onPause() {
