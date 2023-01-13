@@ -15,6 +15,8 @@ import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.here.routeCreator.RouteCreatorTrainingActive;
+import com.example.here.routeCreator.RouteCreatorTrainingSuspended;
 import com.google.android.gms.location.FusedLocationProviderClient;
 import com.google.android.gms.location.LocationRequest;
 import com.google.android.gms.location.LocationCallback;
@@ -23,11 +25,14 @@ import com.google.android.gms.location.LocationServices;
 import com.google.android.gms.location.Priority;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.here.sdk.core.GeoCoordinates;
-import com.here.sdk.core.Location;
 import com.here.sdk.mapview.LocationIndicator;
 import com.here.sdk.mapview.MapMeasure;
 import com.here.sdk.mapview.MapScheme;
 import com.here.sdk.mapview.MapView;
+import com.here.sdk.routing.Waypoint;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class TrainingActivity extends AppCompatActivity {
 
@@ -50,43 +55,61 @@ public class TrainingActivity extends AppCompatActivity {
     private float distance = 0;
     private int kcal = 0;
 
-
     private PermissionsRequestor permissionsRequestor;
-    private LocationIndicator locationIndicator;
     private MapMeasure mapMeasureZoom;
     //    private android.location.Location startLocation;
     private android.location.Location pastLocation;
     private FusedLocationProviderClient fusedLocationProviderClient;
     private LocationRequest locationRequest;
-    private LocationCallback locationCallback = new LocationCallback() {
-        @Override
-        public void onLocationResult(@NonNull LocationResult locationResult) {
-            android.location.Location location = locationResult.getLastLocation();
-            mapView.getCamera().lookAt(
-                    new GeoCoordinates(location.getLatitude(), location.getLongitude()), mapMeasureZoom);
-            locationIndicator.updateLocation(convertLocation(location));
-
-            if (trainingActive) {
-                distance += pastLocation.distanceTo(location);
-                avgSpeed = distance / timeInSec;
-                curSpeed = location.getSpeed();
-                if (curSpeed > maxSpeed)
-                    maxSpeed = curSpeed;
-                displayTrainingData();
-            }
-
-            pastLocation = new android.location.Location(location);
-
-        }
-    };
+    private float distanceUntilWaypoint = 10.0f;
+    private LocationIndicator locationIndicator;
+    private LocationCallback locationCallback;
+    private List<Waypoint> currentWaypoints = new ArrayList<>();
+    RouteCreatorTrainingActive routeCreatorTrainingActive;
+    RouteCreatorTrainingSuspended routeCreatorTrainingSuspended;
+    private Bundle savedInstanceState;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        handleAndroidPermissions(savedInstanceState);
+        this.savedInstanceState = savedInstanceState;
+        this.locationCallback = new LocationCallback() {
+            @Override
+            public void onLocationResult(@NonNull LocationResult locationResult) {
+                android.location.Location location = locationResult.getLastLocation();
+                mapView.onCreate(savedInstanceState);
+                mapView.getCamera().lookAt(
+                        new GeoCoordinates(location.getLatitude(), location.getLongitude()), mapMeasureZoom);
+                locationIndicator.updateLocation(LocationConverter.convertToHERE(location));
+
+                float currentDistance = pastLocation.distanceTo(location);
+                distanceUntilWaypoint -= currentDistance;
+
+                if(distanceUntilWaypoint <= 0) {
+                    distanceUntilWaypoint = 10.0f;
+                    currentWaypoints.add(new Waypoint(new GeoCoordinates(location.getLatitude(), location.getLongitude())));
+                }
+
+                if (trainingActive) {
+
+                    distance += currentDistance;
+
+                    avgSpeed = distance / timeInSec;
+                    curSpeed = location.getSpeed();
+                    if (curSpeed > maxSpeed)
+                        maxSpeed = curSpeed;
+                    displayTrainingData();
+
+                    pastLocation = new android.location.Location(location);
+
+                    routeCreatorTrainingActive.createRoute(currentWaypoints);
+                }
+            }
+        };
+        handleAndroidPermissions();
     }
 
-    private void startTrainingActivity(Bundle savedInstanceState) {
+    private void startTrainingActivity() {
         this.locationRequest = new LocationRequest.Builder(Priority.PRIORITY_BALANCED_POWER_ACCURACY)
                 .setWaitForAccurateLocation(false)
                 .setMinUpdateIntervalMillis(500)
@@ -100,7 +123,7 @@ public class TrainingActivity extends AppCompatActivity {
             fusedLocationProviderClient.getLastLocation().addOnSuccessListener(this, new OnSuccessListener<android.location.Location>() {
                 @Override
                 public void onSuccess(android.location.Location location) {
-                    pastLocation = location; //start
+                    pastLocation = location;
                 }
             });
         }
@@ -131,6 +154,7 @@ public class TrainingActivity extends AppCompatActivity {
                     pauseReturnButton.setText(R.string.paused);
                     trainingActive =!trainingActive;
                     pauseReturnButton.setBackgroundColor(getResources().getColor(R.color.orange));
+                    routeCreatorTrainingSuspended.createRoute(currentWaypoints);
                 }else{
                     pauseReturnButton.setText(R.string.started);
                     trainingActive =!trainingActive;
@@ -151,6 +175,9 @@ public class TrainingActivity extends AppCompatActivity {
         displayTrainingData();
         new TimeMeasure().start();
 
+        this.routeCreatorTrainingActive = new RouteCreatorTrainingActive(this.mapView, this.locationIndicator);
+        this.routeCreatorTrainingSuspended = new RouteCreatorTrainingSuspended(this.mapView);
+
         this.fusedLocationProviderClient.requestLocationUpdates(locationRequest, locationCallback, null);
 
     }
@@ -163,7 +190,7 @@ public class TrainingActivity extends AppCompatActivity {
 
                 locationIndicator = new LocationIndicator();
                 locationIndicator.setLocationIndicatorStyle(LocationIndicator.IndicatorStyle.PEDESTRIAN);
-                locationIndicator.updateLocation(convertLocation(this.pastLocation)); // start
+                locationIndicator.updateLocation(LocationConverter.convertToHERE(this.pastLocation)); // start
 
                 mapView.addLifecycleListener(locationIndicator);
                 mapView.getCamera().lookAt(
@@ -180,29 +207,6 @@ public class TrainingActivity extends AppCompatActivity {
         this.maxSpeedTextView.setText(getString(R.string.maxSpeedText, maxSpeed));
         this.distanceTextView.setText(getString(R.string.distanceText, distance));
         this.kcalTextView.setText(getString(R.string.kcalText, kcal));
-    }
-
-    private Location convertLocation(android.location.Location nativeLocation) {
-        GeoCoordinates geoCoordinates = new GeoCoordinates(
-                nativeLocation.getLatitude(),
-                nativeLocation.getLongitude(),
-                nativeLocation.getAltitude());
-
-        Location location = new Location(geoCoordinates);
-
-        if (nativeLocation.hasBearing()) {
-            location.bearingInDegrees = (double) nativeLocation.getBearing();
-        }
-
-        if (nativeLocation.hasSpeed()) {
-            location.speedInMetersPerSecond = (double) nativeLocation.getSpeed();
-        }
-
-        if (nativeLocation.hasAccuracy()) {
-            location.horizontalAccuracyInMeters = (double) nativeLocation.getAccuracy();
-        }
-
-        return location;
     }
 
     private class TimeMeasure extends Thread{
@@ -227,13 +231,20 @@ public class TrainingActivity extends AppCompatActivity {
         permissionsRequestor.onRequestPermissionsResult(requestCode, grantResults);
     }
 
-    private void handleAndroidPermissions(Bundle savedInstanceState) {
+    private void handleAndroidPermissions() {
+        if (ActivityCompat.checkSelfPermission(this,
+                Manifest.permission.ACCESS_FINE_LOCATION) == PackageManager.PERMISSION_GRANTED &&
+                ActivityCompat.checkSelfPermission(this,
+                        Manifest.permission.ACCESS_COARSE_LOCATION) == PackageManager.PERMISSION_GRANTED) {
+            startTrainingActivity();
+            return;
+        }
         permissionsRequestor = new PermissionsRequestor(this);
         permissionsRequestor.request(new PermissionsRequestor.ResultListener(){
 
             @Override
             public void permissionsGranted() {
-                startTrainingActivity(savedInstanceState);
+                startTrainingActivity();
             }
 
             @Override

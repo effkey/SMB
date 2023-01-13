@@ -1,6 +1,7 @@
-package com.example.here;
+package com.example.here.routeCreator;
 
 import android.util.Log;
+import android.widget.TextView;
 
 import androidx.annotation.Nullable;
 
@@ -21,17 +22,20 @@ import com.here.sdk.routing.Waypoint;
 
 import java.util.List;
 
-public class RouteCreator {
+public abstract class RouteCreator {
 
-    private MapView mapView;
-    private List<Waypoint> currentWaypoints;
-    private int currentRouteLength = 0;
+    protected MapView mapView;
+    protected List<Waypoint> currentWaypoints;
+    protected int currentRouteLength = 0;
 
     public RouteCreator(MapView mapView) {
         this.mapView = mapView;
     }
 
     public void createRoute(List<Waypoint> waypoints){
+
+        if(waypoints.size() < 2)
+            return;
 
         this.currentWaypoints = waypoints;
 
@@ -41,6 +45,7 @@ public class RouteCreator {
         } catch (InstantiationErrorException e) {
             throw new RuntimeException("Initialization of RoutingEngine failed: " + e.error.name());
         }
+
 
         routingEngine.calculateRoute(
                 waypoints,
@@ -59,32 +64,12 @@ public class RouteCreator {
                             mapView.getMapScene().addMapPolyline(routeMapPolyline);
 //                            long estimatedTravelTimeInSeconds = route.getDuration().getSeconds();     //przewidywany czas
                             currentRouteLength = route.getLengthInMeters();
-                            Log.d("DIST", "DISTANCE: " + currentRouteLength+"");
-                            loadMapSceneTrainingSuspended();
+                            loadMapScene();
                         }
                     }
                 });
     }
 
-    private void loadMapSceneTrainingSuspended() {
-        mapView.getMapScene().loadScene(MapScheme.NORMAL_DAY, mapError -> {
-            if (mapError == null) {
-                MapMeasure mapMeasureZoom = new MapMeasure(MapMeasure.Kind.DISTANCE, this.currentRouteLength);
-                double lastTourStartV1 = this.currentWaypoints.get(0).coordinates.latitude;
-                double lastTourEndV1 = this.currentWaypoints.get(currentWaypoints.size()-1).coordinates.latitude;
-                double lastTourStartV2 = this.currentWaypoints.get(0).coordinates.longitude;
-                double lastTourEndV2 = this.currentWaypoints.get(currentWaypoints.size()-1).coordinates.longitude;
-                mapView.getCamera().lookAt(
-                        new GeoCoordinates((lastTourStartV1+lastTourEndV1)/2, (lastTourStartV2+lastTourEndV2)/2), mapMeasureZoom);
-            } else {
-                Log.d("loadMapScene()", "Loading map failed: mapError: " + mapError.name());
-            }
-        });
-    }
-
-    public int getCurrentRouteLength() {
-        return this.currentRouteLength;
-    }
-
+    protected abstract void loadMapScene();
 
 }
