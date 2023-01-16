@@ -15,6 +15,7 @@ import com.here.sdk.mapview.MapScheme;
 import com.here.sdk.mapview.MapView;
 import com.here.sdk.routing.BicycleOptions;
 import com.here.sdk.routing.CalculateRouteCallback;
+import com.here.sdk.routing.PedestrianOptions;
 import com.here.sdk.routing.Route;
 import com.here.sdk.routing.RoutingEngine;
 import com.here.sdk.routing.RoutingError;
@@ -49,7 +50,7 @@ public abstract class RouteCreator {
 
         routingEngine.calculateRoute(
                 waypoints,
-                new BicycleOptions(),
+                new PedestrianOptions(),
                 new CalculateRouteCallback() {
                     @Override
                     public void onRouteCalculated(@Nullable RoutingError routingError, @Nullable List<Route> routes) {

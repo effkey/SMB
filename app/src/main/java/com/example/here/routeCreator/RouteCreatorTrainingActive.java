@@ -31,13 +31,13 @@ public class RouteCreatorTrainingActive extends RouteCreator{
                 pastLocation.setLatitude(coordinates.latitude);
                 pastLocation.setLongitude(coordinates.longitude);
 
-                locationIndicator = new LocationIndicator();
-                locationIndicator.setLocationIndicatorStyle(LocationIndicator.IndicatorStyle.PEDESTRIAN);
-                locationIndicator.updateLocation(
-                        LocationConverter.convertToHERE(pastLocation)
-                );
-
-                mapView.addLifecycleListener(locationIndicator);
+//                locationIndicator = new LocationIndicator();
+//                locationIndicator.setLocationIndicatorStyle(LocationIndicator.IndicatorStyle.PEDESTRIAN);
+//                locationIndicator.updateLocation(
+//                        LocationConverter.convertToHERE(pastLocation)
+//                );
+//
+//                mapView.addLifecycleListener(locationIndicator);
                 /*
                 mapView.getCamera().lookAt(
                         new GeoCoordinates(pastLocation.getLatitude(), pastLocation.getLongitude()), mapMeasureZoom);*/

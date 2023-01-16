@@ -73,14 +73,80 @@ public class TrainingActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         this.savedInstanceState = savedInstanceState;
+        setContentView(R.layout.training_activity);
+        this.mapView = findViewById(R.id.map_view);
+        this.endButton = findViewById(R.id.end_trening);
+        this.pauseReturnButton = findViewById(R.id.return_pause_training);
+        this.timeTextView = findViewById(R.id.time);
+        this.curSpeedTextView = findViewById(R.id.cur_speed);
+        this.avgSpeedTextView = findViewById(R.id.avg_speed);
+        this.maxSpeedTextView = findViewById(R.id.max_speed);
+        this.distanceTextView = findViewById(R.id.distance);
+        this.kcalTextView = findViewById(R.id.kcal);
+        this.locationIndicator = new LocationIndicator();
+
+        this.mapView.onCreate(savedInstanceState);
+
+        this.pauseReturnButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if(trainingActive){
+                    pauseReturnButton.setText(R.string.paused);
+                    trainingActive =!trainingActive;
+                    pauseReturnButton.setBackgroundColor(getResources().getColor(R.color.orange));
+                    routeCreatorTrainingSuspended.createRoute(currentWaypoints);
+                }else{
+                    pauseReturnButton.setText(R.string.started);
+                    trainingActive =!trainingActive;
+                    pauseReturnButton.setBackgroundColor(getResources().getColor(R.color.green));
+                }
+            }
+        });
+        this.endButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(TrainingActivity.this, MainActivity.class);
+                startActivity(intent);
+            }
+        });
+
+        displayTrainingData();
+        handleAndroidPermissions();
+    }
+
+    private void startTrainingActivity() {
+        this.locationRequest = new LocationRequest.Builder(Priority.PRIORITY_BALANCED_POWER_ACCURACY)
+                .setWaitForAccurateLocation(false)
+                .setMinUpdateIntervalMillis(500)
+                .setMaxUpdateDelayMillis(1000)
+                .build();
+        this.fusedLocationProviderClient = LocationServices.getFusedLocationProviderClient(this);
+        if (ActivityCompat.checkSelfPermission(this,
+                Manifest.permission.ACCESS_FINE_LOCATION) == PackageManager.PERMISSION_GRANTED &&
+                ActivityCompat.checkSelfPermission(this,
+                        Manifest.permission.ACCESS_COARSE_LOCATION) == PackageManager.PERMISSION_GRANTED) {
+            fusedLocationProviderClient.getLastLocation().addOnSuccessListener(this, new OnSuccessListener<android.location.Location>() {
+                @Override
+                public void onSuccess(android.location.Location location) {
+                    pastLocation = location;
+                }
+            });
+
+        }
+        else {
+//            Toast.makeText(getApplicationContext(),"Permission denied",Toast.LENGTH_SHORT).show();
+            Log.d("PERM", "NO PERMISSIONS");
+            finish();
+        }
         this.locationCallback = new LocationCallback() {
             @Override
             public void onLocationResult(@NonNull LocationResult locationResult) {
                 android.location.Location location = locationResult.getLastLocation();
-                mapView.onCreate(savedInstanceState);
-                mapView.getCamera().lookAt(
-                        new GeoCoordinates(location.getLatitude(), location.getLongitude()), mapMeasureZoom);
-                locationIndicator.updateLocation(LocationConverter.convertToHERE(location));
+//                mapView.onCreate(savedInstanceState);
+//                mapView.getCamera().lookAt(
+//                        new GeoCoordinates(location.getLatitude(), location.getLongitude()), mapMeasureZoom);
+                if(locationIndicator != null)
+                    locationIndicator.updateLocation(LocationConverter.convertToHERE(location));
 
                 float currentDistance = pastLocation.distanceTo(location);
                 distanceUntilWaypoint -= currentDistance;
@@ -106,74 +172,12 @@ public class TrainingActivity extends AppCompatActivity {
                 }
             }
         };
-        handleAndroidPermissions();
-    }
-
-    private void startTrainingActivity() {
-        this.locationRequest = new LocationRequest.Builder(Priority.PRIORITY_BALANCED_POWER_ACCURACY)
-                .setWaitForAccurateLocation(false)
-                .setMinUpdateIntervalMillis(500)
-                .setMaxUpdateDelayMillis(1000)
-                .build();
-        this.fusedLocationProviderClient = LocationServices.getFusedLocationProviderClient(this);
-        if (ActivityCompat.checkSelfPermission(this,
-                Manifest.permission.ACCESS_FINE_LOCATION) == PackageManager.PERMISSION_GRANTED &&
-                ActivityCompat.checkSelfPermission(this,
-                        Manifest.permission.ACCESS_COARSE_LOCATION) == PackageManager.PERMISSION_GRANTED) {
-            fusedLocationProviderClient.getLastLocation().addOnSuccessListener(this, new OnSuccessListener<android.location.Location>() {
-                @Override
-                public void onSuccess(android.location.Location location) {
-                    pastLocation = location;
-                }
-            });
-        }
-        else {
-//            Toast.makeText(getApplicationContext(),"Permission denied",Toast.LENGTH_SHORT).show();
-            Log.d("PERM", "NO PERMISSIONS");
-            finish();
-        }
-
-//        this.pastLocation = startLocation;
-
-        setContentView(R.layout.training_activity);
-        this.mapView = findViewById(R.id.map_view);
-        this.endButton = findViewById(R.id.end_trening);
-        this.pauseReturnButton = findViewById(R.id.return_pause_training);
-        this.timeTextView = findViewById(R.id.time);
-        this.curSpeedTextView = findViewById(R.id.cur_speed);
-        this.avgSpeedTextView = findViewById(R.id.avg_speed);
-        this.maxSpeedTextView = findViewById(R.id.max_speed);
-        this.distanceTextView = findViewById(R.id.distance);
-        this.kcalTextView = findViewById(R.id.kcal);
 
 
-        this.pauseReturnButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                if(trainingActive){
-                    pauseReturnButton.setText(R.string.paused);
-                    trainingActive =!trainingActive;
-                    pauseReturnButton.setBackgroundColor(getResources().getColor(R.color.orange));
-                    routeCreatorTrainingSuspended.createRoute(currentWaypoints);
-                }else{
-                    pauseReturnButton.setText(R.string.started);
-                    trainingActive =!trainingActive;
-                    pauseReturnButton.setBackgroundColor(getResources().getColor(R.color.green));
-                }
-            }
-        });
-        this.endButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent intent = new Intent(TrainingActivity.this, MainActivity.class);
-                startActivity(intent);
-            }
-        });
-        this.mapView.onCreate(savedInstanceState);
-        loadMapScene();
 
-        displayTrainingData();
         new TimeMeasure().start();
+
+        loadMapScene();
 
         this.routeCreatorTrainingActive = new RouteCreatorTrainingActive(this.mapView, this.locationIndicator);
         this.routeCreatorTrainingSuspended = new RouteCreatorTrainingSuspended(this.mapView);

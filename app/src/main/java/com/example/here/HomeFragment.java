@@ -18,7 +18,7 @@ import com.here.sdk.mapview.MapMeasure;
 import com.here.sdk.mapview.MapPolyline;
 import com.here.sdk.mapview.MapScheme;
 import com.here.sdk.mapview.MapView;
-import com.here.sdk.routing.BicycleOptions;
+import com.here.sdk.routing.PedestrianOptions;
 import com.here.sdk.routing.CalculateRouteCallback;
 import com.here.sdk.routing.Route;
 import com.here.sdk.routing.RoutingEngine;
@@ -70,7 +70,7 @@ public class HomeFragment extends Fragment {
 
         routingEngine.calculateRoute(
                 waypoints,
-                new BicycleOptions(),
+                new PedestrianOptions(),
                 new CalculateRouteCallback() {
                     @Override
                     public void onRouteCalculated(@Nullable RoutingError routingError, @Nullable List<Route> routes) {
