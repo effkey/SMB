@@ -25,4 +25,11 @@
     <string name="distanceText">Dystans: %1$.0f m</string>
     <string name="kcalText">Spalone kalorie: %1$d kcal</string>
 
+    <string name="selectDiscipline"> Wybierz dyscypile sportową</string>
+    <string name="userProfile">Twój profil</string>
+    <string name="settingsTxt">Ustawienia</string>
+    <string name="checkYourFriendsList">Sprawdź, kto jest aktywny z twoich znajomych:</string>
+    <string name="friendsListTxt">Lista znajomych</string>
+    <string name="welcomeText">Witaj, Gabriel!</string>
+
 </resources>

@@ -6,6 +6,10 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
+import android.widget.AutoCompleteTextView;
+import android.widget.Toast;
 
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
@@ -35,11 +39,29 @@ public class HomeFragment extends Fragment {
     private View view;
     private MapView mapView;
 
+    String[] items = {"Marsz","Bieganie","Jazda na rowerze","Kajakarstwo"};
+    AutoCompleteTextView autoCompleteTxt;
+    ArrayAdapter<String> adapterItems;
+
     private double lastTourStartV1 = 53.41178404163292, lastTourStartV2 = 23.516119474276664,           // pobierane z bazy danych / z pamieci urzadzenia
             lastTourEndV1 = 53.1276662351446, lastTourEndV2 = 23.160716949523863;
 
     public HomeFragment() {
         // require a empty public constructor
+    }
+
+    public void chooseDiscipline(){
+        autoCompleteTxt = view.findViewById(R.id.auto_complete_txt);
+        adapterItems = new ArrayAdapter<String>(getActivity(),R.layout.list_item,items);
+        autoCompleteTxt.setText(items[0]);
+        autoCompleteTxt.setAdapter(adapterItems);
+        autoCompleteTxt.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long l) {
+                String item = parent.getItemAtPosition(position).toString();
+//                Toast.makeText(getActivity().getApplicationContext(),"Item: "+item,Toast.LENGTH_SHORT).show();
+            }
+        });
     }
 
     @Override
@@ -48,9 +70,11 @@ public class HomeFragment extends Fragment {
         this.mapView = view.findViewById(R.id.mapView);
         this.mapView.onCreate(savedInstanceState);
 
-        setToLastRoute(new Waypoint(new GeoCoordinates(lastTourStartV1, lastTourStartV2)), new Waypoint(new GeoCoordinates(lastTourEndV1, lastTourEndV2)));     //rysowanie poprzedniej trasy po wspolrzednych
+        setToLastRoute(new Waypoint(new GeoCoordinates(lastTourStartV1, lastTourStartV2)), new Waypoint(new GeoCoordinates(lastTourEndV1, lastTourEndV2)));     //rysowanie poprzedniej trasy po wspolrzednych*/
 
         getActivity().setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_SENSOR);
+
+        chooseDiscipline();
         return view;
     }
 

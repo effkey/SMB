@@ -12,7 +12,7 @@
         android:layout_height="0dp"
         app:layout_constraintTop_toTopOf="parent"
         tools:ignore="MissingConstraints"
-        tools:layout_editor_absoluteX="0dp">
+        tools:layout_editor_absoluteX="16dp">
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
@@ -22,156 +22,132 @@
                 android:id="@+id/welcomText"
                 android:layout_width="284dp"
                 android:layout_height="53dp"
-                android:layout_marginTop="12dp"
+                android:layout_marginStart="10dp"
+                android:layout_marginTop="20dp"
                 android:text="Witaj, Gabriel!"
                 android:textColor="#000000"
+
                 android:textSize="28sp"
-                app:layout_constraintEnd_toEndOf="@+id/button_settings"
-                app:layout_constraintHorizontal_bias="0.0"
-                app:layout_constraintStart_toStartOf="@+id/userButton"
-                app:layout_constraintTop_toBottomOf="@+id/userButton"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
                 tools:ignore="MissingConstraints" />
+
+            <LinearLayout
+                android:id="@+id/linearLayout3"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                app:layout_constraintTop_toBottomOf="@+id/welcomText"
+                tools:layout_editor_absoluteX="0dp">
+
+
+                <com.google.android.material.textfield.TextInputLayout
+                    android:id="@+id/textInputLayout"
+                    style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.ExposedDropdownMenu"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="16dp"
+                    android:layout_marginTop="100dp"
+                    android:hint="@string/selectDiscipline"
+                    app:layout_constraintTop_toBottomOf="@+id/userButton2"
+                    tools:layout_editor_absoluteX="23dp">
+
+                    <AutoCompleteTextView
+                        android:id="@+id/auto_complete_txt"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:inputType="none"
+                        tools:ignore="SpeakableTextPresentCheck" />
+                </com.google.android.material.textfield.TextInputLayout>
+            </LinearLayout>
 
             <TextView
                 android:id="@+id/welcomText2"
-                android:layout_width="329dp"
+                android:layout_width="match_parent"
                 android:layout_height="33dp"
-                android:layout_marginTop="132dp"
+                android:layout_marginTop="40dp"
                 android:text="Sprawdź, kto jest aktywny z twoich znajomych"
+                android:textAlignment="center"
                 android:textColor="#000000"
                 android:textSize="14sp"
-                app:layout_constraintEnd_toEndOf="@+id/button_settings"
-                app:layout_constraintHorizontal_bias="0.0"
-                app:layout_constraintStart_toStartOf="@+id/welcomText"
-                app:layout_constraintTop_toTopOf="parent"
-                tools:ignore="MissingConstraints" />
+                app:layout_constraintTop_toBottomOf="@+id/userButton2"
+                tools:ignore="MissingConstraints"
+                tools:layout_editor_absoluteX="0dp" />
 
             <Button
                 android:id="@+id/userButton"
                 style="@style/style_btn"
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="fill_parent"
-                android:layout_marginTop="16dp"
+                android:layout_marginStart="10dp"
+                android:layout_marginTop="36dp"
+                android:layout_marginEnd="10dp"
                 android:background="@drawable/rounded_corner_green"
-                android:text="Gabriel"
+                android:text="@string/userProfile"
                 android:textSize="14sp"
                 app:icon="@drawable/ic_round_person_24"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.06"
+                app:layout_constraintHorizontal_bias="0.0"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
+                app:layout_constraintTop_toBottomOf="@+id/linearLayout3" />
 
-            <LinearLayout
-                android:id="@+id/linearLayout"
-                android:layout_width="match_parent"
-                android:layout_height="64dp"
-                android:layout_marginTop="12dp"
-                android:weightSum="4"
-                app:layout_constraintTop_toBottomOf="@+id/categories"
-                tools:layout_editor_absoluteX="0dp">
-
-                <androidx.appcompat.widget.AppCompatButton
-                    android:id="@+id/marszButton"
-                    style="@style/style_btn"
-                    android:layout_width="wrap_content"
-                    android:layout_height="fill_parent"
-                    android:layout_marginStart="2dp"
-                    android:layout_marginTop="12dp"
-                    android:layout_weight="1"
-                    android:background="@drawable/rounded_corner_blue"
-                    android:text="@string/button_marsz"
-                    tools:ignore="MissingConstraints" />
-
-                <androidx.appcompat.widget.AppCompatButton
-                    android:id="@+id/kolarstwoButton"
-                    style="@style/style_btn"
-                    android:layout_width="wrap_content"
-                    android:layout_height="fill_parent"
-                    android:layout_marginStart="12dp"
-                    android:layout_marginTop="12dp"
-                    android:layout_weight="1"
-                    android:background="@drawable/rounded_corner_orange"
-                    android:text="@string/button_kolarstwo"
-                    tools:ignore="MissingConstraints" />
-
-                <androidx.appcompat.widget.AppCompatButton
-                    android:id="@+id/kajakarstwoButton"
-                    style="@style/style_btn"
-                    android:layout_width="wrap_content"
-                    android:layout_height="fill_parent"
-                    android:layout_marginStart="12dp"
-                    android:layout_marginTop="12dp"
-                    android:layout_weight="1"
-                    android:background="@drawable/rounded_corner_red"
-                    android:text="@string/button_kajakarstwo"
-                    tools:ignore="MissingConstraints" />
-
-                <androidx.appcompat.widget.AppCompatButton
-                    android:id="@+id/sprintButton"
-                    style="@style/style_btn"
-                    android:layout_width="wrap_content"
-                    android:layout_height="fill_parent"
-                    android:layout_marginStart="12dp"
-                    android:layout_marginTop="12dp"
-                    android:layout_weight="1"
-                    android:background="@drawable/rounded_corner_pink"
-                    android:text="@string/button_sprint"
-                    tools:ignore="MissingConstraints" />
-            </LinearLayout>
-
-            <TextView
-                android:id="@+id/upcoming_events"
-                android:layout_width="378dp"
-                android:layout_height="30dp"
-                android:layout_marginTop="28dp"
-                android:text="Nadchodzące wydarzenia"
-                android:textColor="#000000"
-                android:textSize="14sp"
-                app:layout_constraintEnd_toEndOf="@+id/button_settings"
-                app:layout_constraintHorizontal_bias="0.0"
-                app:layout_constraintStart_toStartOf="@+id/welcomText"
-                app:layout_constraintTop_toBottomOf="@+id/recyclerView"
-                tools:ignore="MissingConstraints" />
-
-            <TextView
-                android:id="@+id/categories"
-                android:layout_width="379dp"
-                android:layout_height="27dp"
+            <Button
+                android:id="@+id/userButton2"
+                style="@style/style_btn"
+                android:layout_width="392dp"
+                android:layout_height="52dp"
+                android:layout_marginStart="10dp"
                 android:layout_marginTop="16dp"
-                android:text="Przeglądaj po kategorii:"
-                android:textColor="#000000"
+                android:layout_marginEnd="10dp"
+                android:background="@drawable/rounded_corner_blue"
+                android:text="@string/friendsListTxt"
                 android:textSize="14sp"
-                app:layout_constraintEnd_toEndOf="@+id/button_settings"
-                app:layout_constraintHorizontal_bias="0.0"
-                app:layout_constraintStart_toStartOf="@+id/welcomText"
-                app:layout_constraintTop_toBottomOf="@+id/recyclerView2"
-                tools:ignore="MissingConstraints" />
+                app:icon="@drawable/ic_person_foreground"
+                app:iconSize="40dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="1.0"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/userButton" />
 
             <Button
                 android:id="@+id/button_settings"
                 style="@style/ToggleButtonWithIconOnly"
-                android:layout_width="69dp"
-                android:layout_height="51dp"
-                android:layout_marginTop="72dp"
+                android:layout_width="175dp"
+                android:layout_height="45dp"
+                android:layout_marginTop="20dp"
+                android:layout_marginEnd="8dp"
                 android:gravity="center"
+                android:text="@string/settingsTxt"
+                android:textColor="@color/lightgrey"
                 app:icon="@drawable/ic_baseline_settings_24"
                 app:iconTint="@color/lightgrey"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.953"
-                app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
+                tools:ignore="MissingConstraints" />
+
+            <TextView
+                android:id="@+id/upcoming_events"
+                android:layout_width="match_parent"
+                android:layout_height="30dp"
+                android:layout_marginTop="20dp"
+                android:text="Nadchodzące wydarzenia"
+                android:textColor="#000000"
+                android:textSize="14sp"
+                android:textAlignment="center"
+                app:layout_constraintStart_toStartOf="@+id/welcomText"
+                app:layout_constraintTop_toBottomOf="@+id/recyclerView"
                 tools:ignore="MissingConstraints" />
 
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/recyclerView"
                 android:layout_width="match_parent"
                 android:layout_height="119dp"
-                android:layout_marginTop="168dp"
+                android:layout_marginTop="21dp"
                 android:background="@color/lightgrey2"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.355"
+                app:layout_constraintHorizontal_bias="0.0"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
+                app:layout_constraintTop_toBottomOf="@+id/welcomText2" />
 
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/recyclerView2"
@@ -188,23 +164,14 @@
                 android:id="@+id/mapView"
                 android:layout_width="match_parent"
                 android:layout_height="247dp"
-                android:layout_marginTop="84dp"
+                android:layout_marginTop="10dp"
+                android:layout_marginBottom="90dp"
                 android:background="@color/lightgrey2"
+                app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.0"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/linearLayout" />
-
-            <TextView
-                android:id="@+id/textView"
-                android:layout_width="165dp"
-                android:layout_height="30dp"
-                android:layout_marginTop="24dp"
-                android:text="TextView"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.125"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/linearLayout" />
+                app:layout_constraintTop_toBottomOf="@+id/recyclerView2" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
     </ScrollView>

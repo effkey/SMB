@@ -9,6 +9,7 @@ import android.content.Context;
 import android.os.Bundle;
 import android.util.Log;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -56,6 +57,7 @@ public class MainActivity extends AppCompatActivity implements BottomNavigationV
 
         if (savedInstanceState == null) {
             bottomNavigationView.setSelectedItemId(R.id.home);
+
         }
 
         setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_SENSOR);
