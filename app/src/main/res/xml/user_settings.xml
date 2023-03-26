@@ -2,14 +2,13 @@
 <PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
     <PreferenceCategory android:title="Ustawienia użytkownika">
         <Preference
-            android:key="theme_preference"
             android:defaultValue="false"
-            android:title="Zmień swoją nazwę użytkownika">
-        </Preference>
+            android:key="theme_preference"
+            android:title="Zmień nazwę użytkownika"></Preference>
         <Preference
             android:key="theme_preference"
             android:defaultValue="false"
-            android:title="Zmień swoje hasło">
+            android:title="Zmień hasło">
         </Preference>
         <Preference
             android:key="theme_preference"
@@ -19,7 +18,7 @@
         <Preference
             android:key="theme_preference"
             android:defaultValue="false"
-            android:title="Zmień swój awatar">
+            android:title="Zmień awatar">
         </Preference>
         <PreferenceCategory android:title="Zarządzanie kontem">
             <Preference android:title="Usuń konto"></Preference>
