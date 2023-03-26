@@ -67,10 +67,10 @@ public class HomeFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         view = inflater.inflate(R.layout.fragment_home, container, false);;
-        this.mapView = view.findViewById(R.id.mapView);
-        this.mapView.onCreate(savedInstanceState);
+//        this.mapView = view.findViewById(R.id.mapView);
+//        this.mapView.onCreate(savedInstanceState);
 
-        setToLastRoute(new Waypoint(new GeoCoordinates(lastTourStartV1, lastTourStartV2)), new Waypoint(new GeoCoordinates(lastTourEndV1, lastTourEndV2)));     //rysowanie poprzedniej trasy po wspolrzednych*/
+//        setToLastRoute(new Waypoint(new GeoCoordinates(lastTourStartV1, lastTourStartV2)), new Waypoint(new GeoCoordinates(lastTourEndV1, lastTourEndV2)));     //rysowanie poprzedniej trasy po wspolrzednych*/
 
         getActivity().setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_SENSOR);
 
@@ -78,53 +78,53 @@ public class HomeFragment extends Fragment {
         return view;
     }
 
-    private void setToLastRoute(Waypoint start, Waypoint end){
-        RoutingEngine routingEngine;
-        try {
-            routingEngine = new RoutingEngine();
-        } catch (InstantiationErrorException e) {
-            throw new RuntimeException("Initialization of RoutingEngine failed: " + e.error.name());
-        }
-
-        Waypoint startWaypoint = start;
-        Waypoint destinationWaypoint = end;
-
-        List<Waypoint> waypoints =
-                new ArrayList<>(Arrays.asList(startWaypoint, destinationWaypoint));
-
-        routingEngine.calculateRoute(
-                waypoints,
-                new PedestrianOptions(),
-                new CalculateRouteCallback() {
-                    @Override
-                    public void onRouteCalculated(@Nullable RoutingError routingError, @Nullable List<Route> routes) {
-                        if (routingError == null) {
-                            Route route = routes.get(0);
-                            GeoPolyline routeGeoPolyline = route.getGeometry();
-                            float widthInPixels = 10;
-                            MapPolyline routeMapPolyline = new MapPolyline(routeGeoPolyline,
-                                    widthInPixels,
-                                    Color.valueOf(0,1,0)); // RGBA
-
-                            mapView.getMapScene().addMapPolyline(routeMapPolyline);
-//                            long estimatedTravelTimeInSeconds = route.getDuration().getSeconds();     //przewidywany czas
-                            int routeLengthInMeters = route.getLengthInMeters();    //mierzy odleglosc
-                            Log.d("wyliczona odleglosc: ", routeLengthInMeters+"");
-                            loadMapScene(routeLengthInMeters);
-                        }
-                    }
-                });
-    }
-
-    private void loadMapScene(int routeLengthInMeters) {
-        mapView.getMapScene().loadScene(MapScheme.NORMAL_DAY, mapError -> {
-            if (mapError == null) {
-                MapMeasure mapMeasureZoom = new MapMeasure(MapMeasure.Kind.DISTANCE, routeLengthInMeters);
-                mapView.getCamera().lookAt(
-                        new GeoCoordinates((lastTourStartV1+lastTourEndV1)/2, (lastTourStartV2+lastTourEndV2)/2), mapMeasureZoom);
-            } else {
-                Log.d("loadMapScene()", "Loading map failed: mapError: " + mapError.name());
-            }
-        });
-    }
+//    private void setToLastRoute(Waypoint start, Waypoint end){
+//        RoutingEngine routingEngine;
+//        try {
+//            routingEngine = new RoutingEngine();
+//        } catch (InstantiationErrorException e) {
+//            throw new RuntimeException("Initialization of RoutingEngine failed: " + e.error.name());
+//        }
+//
+//        Waypoint startWaypoint = start;
+//        Waypoint destinationWaypoint = end;
+//
+//        List<Waypoint> waypoints =
+//                new ArrayList<>(Arrays.asList(startWaypoint, destinationWaypoint));
+//
+//        routingEngine.calculateRoute(
+//                waypoints,
+//                new PedestrianOptions(),
+//                new CalculateRouteCallback() {
+//                    @Override
+//                    public void onRouteCalculated(@Nullable RoutingError routingError, @Nullable List<Route> routes) {
+//                        if (routingError == null) {
+//                            Route route = routes.get(0);
+//                            GeoPolyline routeGeoPolyline = route.getGeometry();
+//                            float widthInPixels = 10;
+//                            MapPolyline routeMapPolyline = new MapPolyline(routeGeoPolyline,
+//                                    widthInPixels,
+//                                    Color.valueOf(0,1,0)); // RGBA
+//
+//                            mapView.getMapScene().addMapPolyline(routeMapPolyline);
+////                            long estimatedTravelTimeInSeconds = route.getDuration().getSeconds();     //przewidywany czas
+//                            int routeLengthInMeters = route.getLengthInMeters();    //mierzy odleglosc
+//                            Log.d("wyliczona odleglosc: ", routeLengthInMeters+"");
+//                            loadMapScene(routeLengthInMeters);
+//                        }
+//                    }
+//                });
+//    }
+//
+//    private void loadMapScene(int routeLengthInMeters) {
+//        mapView.getMapScene().loadScene(MapScheme.NORMAL_DAY, mapError -> {
+//            if (mapError == null) {
+//                MapMeasure mapMeasureZoom = new MapMeasure(MapMeasure.Kind.DISTANCE, routeLengthInMeters);
+//                mapView.getCamera().lookAt(
+//                        new GeoCoordinates((lastTourStartV1+lastTourEndV1)/2, (lastTourStartV2+lastTourEndV2)/2), mapMeasureZoom);
+//            } else {
+//                Log.d("loadMapScene()", "Loading map failed: mapError: " + mapError.name());
+//            }
+//        });
+//    }
 }

@@ -80,7 +80,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="fill_parent"
                 android:layout_marginStart="10dp"
-                android:layout_marginTop="36dp"
+                android:layout_marginTop="20dp"
                 android:layout_marginEnd="10dp"
                 android:background="@drawable/rounded_corner_green"
                 android:text="@string/userProfile"
@@ -154,24 +154,14 @@
                 android:layout_width="match_parent"
                 android:layout_height="113dp"
                 android:layout_marginTop="8dp"
+                android:layout_marginBottom="100dp"
                 android:background="@color/lightgrey2"
+                app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.4"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/upcoming_events" />
 
-            <com.here.sdk.mapview.MapView
-                android:id="@+id/mapView"
-                android:layout_width="match_parent"
-                android:layout_height="247dp"
-                android:layout_marginTop="10dp"
-                android:layout_marginBottom="90dp"
-                android:background="@color/lightgrey2"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.0"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/recyclerView2" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
     </ScrollView>
