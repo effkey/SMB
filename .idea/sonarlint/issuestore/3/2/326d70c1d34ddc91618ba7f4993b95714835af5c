@@ -1,0 +1,26 @@
+
+t
+java:S22937"YReplace the type specification in this constructor call with the diamond operator ("<>").(íŽ¡•úÿÿÿÿ
+>
+java:S1604:"(Make this anonymous inner class a lambda(ŽÜã»
+g
+java:S1659."LDeclare "lastTourStartV2" and all following declarations on a separate line.(àÝ‹”úÿÿÿÿ
+S
+java:S1854="8Remove this useless assignment to local variable "item".(¨ÐÐÿÿÿÿÿ
+D
+java:S1481=")Remove this unused "item" local variable.(¨ÐÐÿÿÿÿÿ
+Q	java:S125>"<This block of commented-out lines of code should be removed.(×¼”ï
+2
+java:S1116E"Remove this empty statement.(¯á©÷
+X	java:S125F"<This block of commented-out lines of code should be removed.(òÜˆÍ8Žãæëñ0
+W	java:S125Q"<This block of commented-out lines of code should be removed.(Ìâ§%8¤¹æëñ0
+M
+java:S1068("+Remove this unused "mapView" private field.(·žÀºúÿÿÿÿ8ŒÝÑëñ0
+U
+java:S1068."3Remove this unused "lastTourStartV1" private field.(àÝ‹”úÿÿÿÿ8þ·Ñëñ0
+U
+java:S1068."3Remove this unused "lastTourStartV2" private field.(àÝ‹”úÿÿÿÿ8ÿ·Ñëñ0
+S
+java:S1068/"1Remove this unused "lastTourEndV1" private field.(ùÿþ†ûÿÿÿÿ8ÿ·Ñëñ0
+S
+java:S1068/"1Remove this unused "lastTourEndV2" private field.(ùÿþ†ûÿÿÿÿ8ÿ·Ñëñ0

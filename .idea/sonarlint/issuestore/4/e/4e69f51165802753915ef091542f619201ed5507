@@ -1,0 +1,42 @@
+
+C
+java:S1604;"(Make this anonymous inner class a lambda(¿©²úÿÿÿÿ
+C
+java:S1604B"(Make this anonymous inner class a lambda(†åÉ–ıÿÿÿÿ
+>
+java:S1604I"(Make this anonymous inner class a lambda(£¿š¬
+>
+java:S1604R"(Make this anonymous inner class a lambda(Ëî£•
+v
+java:S1450"[Remove the "cancelButton" field and declare it as a local variable in the relevant methods.(¨çÎüÿÿÿÿ
+v
+java:S1450&"`Remove the "locationIndicator" field and declare it as a local variable in the relevant methods.(­Á¼
+q
+java:S1450"VRemove the "mapView" field and declare it as a local variable in the relevant methods.(·Àºúÿÿÿÿ
+t
+java:S1450"YRemove the "resetRoute" field and declare it as a local variable in the relevant methods.(×£ñÊùÿÿÿÿ
+r
+java:S1450"WRemove the "setRoute" field and declare it as a local variable in the relevant methods.(÷¡‡—ıÿÿÿÿ
+q
+java:S1450"[Remove the "skipSetRoute" field and declare it as a local variable in the relevant methods.(Ã’­„
+V	java:S125!"<This block of commented-out lines of code should be removed.(¨ß£¡úÿÿÿÿ
+S
+java:S1068"8Remove this unused "permissionsRequestor" private field.(êê‚öùÿÿÿÿ
+M
+java:S1068 "2Remove this unused "mapMeasureZoom" private field.(ÿï†¹ûÿÿÿÿ
+F
+java:S1068""0Remove this unused "pastLocation" private field.(¯½§Î
+U
+java:S1068#"?Remove this unused "fusedLocationProviderClient" private field.(«¾Ææ
+H
+java:S1068$"3Remove this unused "locationRequest" private field.(¢¢ B
+T
+java:S1068%"9Remove this unused "distanceUntilWaypoint" private field.(Ú¸º›øÿÿÿÿ
+K
+java:S1068&"5Remove this unused "locationIndicator" private field.(­Á¼
+O
+java:S1068'"4Remove this unused "locationCallback" private field.(ÕÆ…Úúÿÿÿÿ
+O
+java:S1068("4Remove this unused "currentWaypoints" private field.(Ï—¤‚ıÿÿÿÿ
+Q
+java:S1068)"6Remove this unused "savedInstanceState" private field.(ïôÈ‹ùÿÿÿÿ

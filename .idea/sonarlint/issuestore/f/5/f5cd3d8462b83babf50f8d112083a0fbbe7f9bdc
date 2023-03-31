@@ -1,0 +1,27 @@
+
+C
+java:S16047"(Make this anonymous inner class a lambda(ÈÑÙöüÿÿÿÿ
+[
+java:S1659"EDeclare "avgSpeed" and all following declarations on a separate line.(Øáûå
+g
+java:S1659"LDeclare "lastTourStartV2" and all following declarations on a separate line.(àİ‹”úÿÿÿÿ
+m
+java:S1450"WRemove the "avgSpeed" field and declare it as a local variable in the relevant methods.(Øáûå
+m
+java:S1450"WRemove the "distance" field and declare it as a local variable in the relevant methods.(Øáûå
+m
+java:S1450"WRemove the "duration" field and declare it as a local variable in the relevant methods.(Øáûå
+i
+java:S1450"SRemove the "kcal" field and declare it as a local variable in the relevant methods.(Øáûå
+q
+java:S1450!"VRemove the "mapView" field and declare it as a local variable in the relevant methods.(·Àºúÿÿÿÿ
+m
+java:S1450"WRemove the "maxSpeed" field and declare it as a local variable in the relevant methods.(Øáûå
+q
+java:S1450$"[Remove the "routeCreator" field and declare it as a local variable in the relevant methods.(æÁËó
+w
+java:S1450""\Remove the "startTraining" field and declare it as a local variable in the relevant methods.(íß‚¦ÿÿÿÿÿ
+i
+java:S1450"SRemove the "view" field and declare it as a local variable in the relevant methods.(ØÊ»¶
+V	java:S125O"<This block of commented-out lines of code should be removed.(‰ ½äøÿÿÿÿ
+V	java:S125a"<This block of commented-out lines of code should be removed.(àÛÅûÿÿÿÿ

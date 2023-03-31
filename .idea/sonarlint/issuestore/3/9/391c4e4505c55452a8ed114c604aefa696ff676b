@@ -1,0 +1,25 @@
+
+[	java:S112a"FDefine and throw a dedicated exception instead of using a generic one.(Â≈∫õ
+Q	java:S125"<This block of commented-out lines of code should be removed.(äØ·õ
+r
+java:S3252*"WUse static access with "androidx.core.content.ContextCompat" for "checkSelfPermission".(Àê˘¢˛ˇˇˇˇ
+m
+java:S3252,"WUse static access with "androidx.core.content.ContextCompat" for "checkSelfPermission".(œ£îœ
+`
+java:S1874E"JDon't override a deprecated method or explicitly mark it as "@Deprecated".(¿ƒﬁí
+N
+java:S1874G"8Remove this use of "LocationProvider"; it is deprecated.(“Ωô™
+G
+java:S1874G"1Remove this use of "AVAILABLE"; it is deprecated.(“Ωô™
+S
+java:S1874J"8Remove this use of "LocationProvider"; it is deprecated.(≤«·î˙ˇˇˇˇ
+Q
+java:S1874J"6Remove this use of "OUT_OF_SERVICE"; it is deprecated.(≤«·î˙ˇˇˇˇ
+S
+java:S1874M"8Remove this use of "LocationProvider"; it is deprecated.(∞âªÚ˘ˇˇˇˇ
+Z
+java:S1874M"?Remove this use of "TEMPORARILY_UNAVAILABLE"; it is deprecated.(∞âªÚ˘ˇˇˇˇ
+r
+java:S3252d"WUse static access with "androidx.core.content.ContextCompat" for "checkSelfPermission".(Àê˘¢˛ˇˇˇˇ
+m
+java:S3252f"WUse static access with "androidx.core.content.ContextCompat" for "checkSelfPermission".(œ£îœ

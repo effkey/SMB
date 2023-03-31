@@ -1,0 +1,19 @@
+
+[	java:S112h"FDefine and throw a dedicated exception instead of using a generic one.(‹¨«Ô
+y
+java:S1450-"cRemove the "bottomNavigationView" field and declare it as a local variable in the relevant methods.(ê¥ÎÚ
+Š
+java:S3252+"oUse static access with "com.google.android.material.navigation.NavigationBarView" for "OnItemSelectedListener".(Þþß»þÿÿÿÿ
+T
+java:S19058"9Remove this unnecessary cast to "OnItemSelectedListener".(ßÎÜ´úÿÿÿÿ
+Š
+java:S32528"oUse static access with "com.google.android.material.navigation.NavigationBarView" for "OnItemSelectedListener".(ßÎÜ´úÿÿÿÿ
+<	java:S131J""Add a default case to this switch.(øå´¡ÿÿÿÿÿ
+V	java:S125{"<This block of commented-out lines of code should be removed.(ïÕó€ýÿÿÿÿ
+Q	java:S125’"<This block of commented-out lines of code should be removed.(Ìâ§%
+9
+java:S1128	"Remove this duplicated import.(°þÊóøÿÿÿÿ
+4
+java:S1128"Remove this duplicated import.(ˆÛúÜ
+4
+java:S1128"Remove this duplicated import.(€¶£î

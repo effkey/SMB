@@ -1,0 +1,40 @@
+
+>
+java:S1604Z"(Make this anonymous inner class a lambda(ü“áÕ
+C
+java:S1604i"(Make this anonymous inner class a lambda(ŠÂŽáÿÿÿÿÿ
+?
+java:S1604€"(Make this anonymous inner class a lambda(ë¤ÿ‡
+_
+java:S2184À"HCast one of the operands of this multiplication operation to a "double".(Î¤†ð
+n
+java:S1450'"XRemove the "endButton" field and declare it as a local variable in the relevant methods.(ÏÜçŽ
+s
+java:S1450?"^Remove the "locationRequest" field and declare it as a local variable in the relevant methods.(¢¢ B
+|
+java:S1450F"aRemove the "savedInstanceState" field and declare it as a local variable in the relevant methods.(ïôÈ‹ùÿÿÿÿ
+V	java:S125<"<This block of commented-out lines of code should be removed.(¨ß£¡úÿÿÿÿ
+I
+java:S2757_"3Add a space between "=" and "!" to avoid confusion.(úŒàŠ
+K
+java:S1874`"0Remove this use of "getColor"; it is deprecated.(Š’±€úÿÿÿÿ
+I
+java:S2757d"3Add a space between "=" and "!" to avoid confusion.(úŒàŠ
+F
+java:S1874e"0Remove this use of "getColor"; it is deprecated.(ÌÊØ‘
+l
+java:S3252|"WUse static access with "androidx.core.content.ContextCompat" for "checkSelfPermission".(µ‰¯0
+m
+java:S3252~"WUse static access with "androidx.core.content.ContextCompat" for "checkSelfPermission".(…à‡
+W	java:S125‰"<This block of commented-out lines of code should be removed.(Õß ýÿÿÿÿ
+W	java:S125‘"<This block of commented-out lines of code should be removed.(˜æ­Çøÿÿÿÿ
+u
+java:S2142â"^Either re-interrupt this method or rethrow the "InterruptedException" that can be caught here.(ä ¹€
+f
+java:S1874é"JDon't override a deprecated method or explicitly mark it as "@Deprecated".(Ó»×¶þÿÿÿÿ
+m
+java:S3252ï"WUse static access with "androidx.core.content.ContextCompat" for "checkSelfPermission".(µ‰¯0
+n
+java:S3252ñ"WUse static access with "androidx.core.content.ContextCompat" for "checkSelfPermission".(…à‡
+Q
+java:S1068F"6Remove this unused "savedInstanceState" private field.(ïôÈ‹ùÿÿÿÿ

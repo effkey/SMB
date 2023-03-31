@@ -1,0 +1,61 @@
+
+m
+java:S1192-"KDefine a constant instead of duplicating this literal "PotwierdÅº" 4 times.(¼¾ªıÿÿÿÿ8ÇÅ¹çÛ0
+i
+java:S11923"GDefine a constant instead of duplicating this literal "Anuluj" 4 times.(€Şúÿÿÿÿ8ÈÅ¹çÛ0
+J
+java:S1604-"(Make this anonymous inner class a lambda(¼¾ªıÿÿÿÿ8 ñ“çÛ0
+J
+java:S16043"(Make this anonymous inner class a lambda(€Şúÿÿÿÿ8 ñ“çÛ0
+E
+java:S1604#"(Make this anonymous inner class a lambda(Ô§–Ú8ëİ‡çÛ0
+J
+java:S1604G"(Make this anonymous inner class a lambda(¼¾ªıÿÿÿÿ8½ª¸çÛ0
+J
+java:S1604M"(Make this anonymous inner class a lambda(€Şúÿÿÿÿ8½ª¸çÛ0
+J
+java:S1604="(Make this anonymous inner class a lambda(«°ßëşÿÿÿÿ8òşŠçÛ0
+J
+java:S1604a"(Make this anonymous inner class a lambda(¼¾ªıÿÿÿÿ8ÌÅ¹çÛ0
+J
+java:S1604g"(Make this anonymous inner class a lambda(€Şúÿÿÿÿ8ÌÅ¹çÛ0
+E
+java:S1604W"(Make this anonymous inner class a lambda(æ±ü•8©²‹çÛ0
+J
+java:S1604q"(Make this anonymous inner class a lambda(ïşç’üÿÿÿÿ8Êİ‹çÛ0
+E
+java:S1604y"(Make this anonymous inner class a lambda(„’·Í8Ëİ‹çÛ0
+K
+java:S1604‰"(Make this anonymous inner class a lambda(¼¾ªıÿÿÿÿ8¤æ¾çÛ0
+K
+java:S1604"(Make this anonymous inner class a lambda(€Şúÿÿÿÿ8¥æ¾çÛ0
+E
+java:S1604€"(Make this anonymous inner class a lambda(„Û©8ä ŒçÛ0
+}
+java:S1450"[Remove the "avatarButton" field and declare it as a local variable in the relevant methods.(ÕÃåüÿÿÿÿ8ò¢˜æÛ0
+v
+java:S1450"YRemove the "dataButton" field and declare it as a local variable in the relevant methods.(³ì£‹8ò¢˜æÛ0
+w
+java:S1450"ZRemove the "emailButton" field and declare it as a local variable in the relevant methods.(ÕšâÂ8şõ—æÛ0
+}
+java:S1450"[Remove the "logOutButton" field and declare it as a local variable in the relevant methods.(Öı¿“ùÿÿÿÿ8ò¢˜æÛ0
+y
+java:S1450"]Remove the "passwordButton" field and declare it as a local variable in the relevant methods.(›ÒÄE8õä—æÛ0
+
+java:S1450"]Remove the "usernameButton" field and declare it as a local variable in the relevant methods.(ËÂå•ùÿÿÿÿ8öá•æÛ0
+\
+java:S1854/"?Remove this useless assignment to local variable "enteredText".(Õ8Ÿµ’çÛ0
+M
+java:S1481/"0Remove this unused "enteredText" local variable.(Õ8 µ’çÛ0
+\
+java:S1854I"?Remove this useless assignment to local variable "enteredText".(Õ8ğª¸çÛ0
+M
+java:S1481I"0Remove this unused "enteredText" local variable.(Õ8ñª¸çÛ0
+\
+java:S1854c"?Remove this useless assignment to local variable "enteredText".(Õ8’Æ¹çÛ0
+M
+java:S1481c"0Remove this unused "enteredText" local variable.(Õ8’Æ¹çÛ0
+c
+java:S1854t"ARemove this useless assignment to local variable "dialogBuilder".(©«Ãöúÿÿÿÿ8òİ‹çÛ0
+T
+java:S1481t"2Remove this unused "dialogBuilder" local variable.(©«Ãöúÿÿÿÿ8óİ‹çÛ0
